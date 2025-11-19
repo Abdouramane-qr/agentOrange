@@ -1,0 +1,21 @@
+{
+  "name": "YAAM - Assistant Virtuel Orange Burkina Faso",
+  "short_name": "YAAM",
+  "description": "Votre assistant virtuel intelligent pour tous vos besoins Orange Burkina Faso : recharge, Orange Money, forfaits internet et plus.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FF7900",
+  "icons": [
+    {
+      "src": "/yaam-avatar.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/yaam-avatar.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

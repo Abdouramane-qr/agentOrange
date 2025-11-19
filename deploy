@@ -1,0 +1,31 @@
+#!/bin/bash
+set -e
+
+# Variables — modifie selon ton contexte
+LOCAL_BUILD_CMD="npm run build"
+LOCAL_DIST_DIR="dist"
+REMOTE_USER="tonuser"
+REMOTE_HOST="tondomaine.com"
+REMOTE_APP_PATH="/home/tonuser/public_html/yaam/"
+SSH_PORT=22
+# Si clé SSH : 
+SSH_IDENTITY="~/.ssh/id_rsa"
+
+echo "🚀 1. Compilation locale..."
+$LOCAL_BUILD_CMD
+
+echo "✅ Build local terminée. Préparation de l’upload..."
+
+echo "📂 Suppression de l'ancien dossier sur le serveur..."
+ssh -i $SSH_IDENTITY -p $SSH_PORT $REMOTE_USER@$REMOTE_HOST "rm -rf ${REMOTE_APP_PATH}${LOCAL_DIST_DIR} && mkdir -p ${REMOTE_APP_PATH}${LOCAL_DIST_DIR}"
+
+echo "📤 Upload vers le serveur..."
+scp -i $SSH_IDENTITY -P $SSH_PORT -r $LOCAL_DIST_DIR/* $REMOTE_USER@$REMOTE_HOST:${REMOTE_APP_PATH}${LOCAL_DIST_DIR}/
+
+echo "✅ Upload terminé."
+
+# Optionnel : redémarrage ou cache
+echo "🔧 Si nécessaire, redémarrage de l'application sur le serveur..."
+ssh -i $SSH_IDENTITY -p $SSH_PORT $REMOTE_USER@$REMOTE_HOST "cd ${REMOTE_APP_PATH}${LOCAL_DIST_DIR} && pm2 restart yaam || echo 'Pas de gestionnaire de process PM2'"
+
+echo "🎉 Déploiement local → serveur terminé avec succès."
