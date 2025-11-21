@@ -26,7 +26,16 @@ declare global {
 
 const Footer: React.FC = () => {
   return (
-    <footer className="fixed bottom-20 md:bottom-4 right-4 z-50">
+    <footer data-tutorial="assistant" className="fixed bottom-20 md:bottom-4 right-4 z-50">
+      {/* Badge animé pour attirer l'attention */}
+      <div className="absolute -top-2 -right-2 z-10 pointer-events-none">
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-orange rounded-full blur-sm animate-pulse"></div>
+          <div className="relative bg-gradient-orange text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-bounce">
+            🎙️ Parlez-moi !
+          </div>
+        </div>
+      </div>
       <elevenlabs-convai
         agent-id="agent_8301kaca8frjf1d9k4h913dv8rf2"
         server-location="us"

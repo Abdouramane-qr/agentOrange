@@ -17,7 +17,7 @@ export const Sidebar = ({ activeTab, onTabChange }: SidebarProps) => {
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex fixed left-0 top-0 h-screen w-20 bg-primary flex-col items-center py-6 gap-6 z-20">
+      <aside data-tutorial="sidebar" className="hidden md:flex fixed left-0 top-0 h-screen w-20 bg-primary flex-col items-center py-6 gap-6 z-20">
         {tabs.map((tab, index) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -38,6 +38,7 @@ export const Sidebar = ({ activeTab, onTabChange }: SidebarProps) => {
               )}
               aria-label={tab.label}
               aria-current={isActive ? "page" : undefined}
+              data-tutorial={`${tab.id}-tab`}
             >
               <motion.div
                 animate={isActive ? { scale: [1, 1.2, 1] } : {}}
@@ -68,6 +69,7 @@ export const Sidebar = ({ activeTab, onTabChange }: SidebarProps) => {
                 )}
                 aria-label={tab.label}
                 aria-current={isActive ? "page" : undefined}
+                data-tutorial={`${tab.id}-tab`}
               >
                 <motion.div
                   animate={isActive ? { scale: 1.1 } : { scale: 1 }}
